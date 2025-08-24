@@ -34,9 +34,11 @@ const Header = () => {
         {/* This container is a flexbox on mobile and a grid on desktop */}
         <div className="flex md:grid md:grid-cols-3 items-center h-20 justify-between">
           
-          {/* Left Side: College Logo (Always visible) */}
+          {/* Left Side: College Logo (Now a clickable link) */}
           <div className="flex-shrink-0 md:justify-self-start">
-            <img className="h-14 w-auto" src={CollegeLogo} alt="College Logo" />
+            <NavLink to="/" onClick={() => setIsMenuOpen(false)}>
+              <img className="h-14 w-auto" src={CollegeLogo} alt="College Logo" />
+            </NavLink>
           </div>
 
           {/* Center: Desktop Navigation Links (Hidden on mobile) */}
