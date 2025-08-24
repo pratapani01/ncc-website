@@ -6,13 +6,14 @@ import { NavLink } from 'react-router-dom';
 import CollegeLogo from '../assets/college_logo.png'; 
 import NccLogo from '../assets/ncc_logo.png';
 
-// SVG Icons for the mobile menu button
+// Naya, stylish Menu Icon
 const MenuIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+    <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h10M4 18h16" />
   </svg>
 );
 
+// Close (X) Icon
 const XIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -21,7 +22,6 @@ const XIcon = () => (
 
 
 const Header = () => {
-  // State to manage whether the mobile menu is open or closed
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const linkStyle = "text-gray-700 hover:text-blue-600 font-semibold text-lg transition duration-200";
@@ -31,42 +31,40 @@ const Header = () => {
   return (
     <header className="bg-gradient-to-r from-[#FF9933]/70 via-white/60 to-[#138808]/70 backdrop-blur-lg shadow-md sticky top-0 z-50 border-b border-white/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* This container is a flexbox on mobile and a grid on desktop */}
         <div className="flex md:grid md:grid-cols-3 items-center h-20 justify-between">
           
-          {/* Left Side: College Logo (Now a clickable link) */}
           <div className="flex-shrink-0 md:justify-self-start">
             <NavLink to="/" onClick={() => setIsMenuOpen(false)}>
               <img className="h-14 w-auto" src={CollegeLogo} alt="College Logo" />
             </NavLink>
           </div>
 
-          {/* Center: Desktop Navigation Links (Hidden on mobile) */}
           <nav className="hidden md:flex md:space-x-10 justify-self-center">
             <NavLink to="/" className={({ isActive }) => isActive ? `${linkStyle} ${activeLinkStyle}` : linkStyle}>Home</NavLink>
             <NavLink to="/about" className={({ isActive }) => isActive ? `${linkStyle} ${activeLinkStyle}` : linkStyle}>About</NavLink>
             <NavLink to="/contact" className={({ isActive }) => isActive ? `${linkStyle} ${activeLinkStyle}` : linkStyle}>Contact Us</NavLink>
           </nav>
 
-          {/* Right Side: NCC Logo (Desktop) & Menu Button (Mobile) */}
           <div className="flex-shrink-0 justify-self-end flex items-center">
-            {/* NCC Logo for Desktop (Hidden on mobile) */}
             <img className="hidden md:block h-16 w-auto" src={NccLogo} alt="NCC Logo" />
             
-            {/* Mobile Menu Button (Hidden on desktop) */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 rounded-md text-gray-700 hover:bg-white/50 focus:outline-none"
+              className="md:hidden flex items-center space-x-2 p-2 rounded-md text-gray-800 hover:bg-white/50 focus:outline-none transition-colors"
               aria-label="Toggle menu"
             >
-              {isMenuOpen ? <XIcon /> : <MenuIcon />}
+              {isMenuOpen ? <XIcon /> : (
+                <>
+                  <span className="font-bold text-sm">MENU</span>
+                  <MenuIcon />
+                </>
+              )}
             </button>
           </div>
 
         </div>
       </div>
 
-      {/* Mobile Menu Panel (Only shows when isMenuOpen is true) */}
       {isMenuOpen && (
         <div className="md:hidden pb-4 px-2">
           <nav className="flex flex-col space-y-2">
